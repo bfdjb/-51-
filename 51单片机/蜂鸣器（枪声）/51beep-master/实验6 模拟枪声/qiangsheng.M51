@@ -1,0 +1,127 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        03/27/2025  22:07:24  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\RUANJIAN\C51\C51\BIN\BL51.EXE qiangsheng.obj TO qiangsheng
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  qiangsheng.obj (QIANGSHENG)
+  D:\RUANJIAN\C51\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  qiangsheng (QIANGSHENG)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0002H     UNIT         ?DT?QIANGSHENG
+            IDATA   000AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     07F2H                  *** GAP ***
+            CODE    0800H     002FH     UNIT         ?PR?TIME0?QIANGSHENG
+            CODE    082FH     001FH     UNIT         ?PR?MAIN?QIANGSHENG
+            CODE    084EH     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   qiangsheng (QIANGSHENG)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?QIANGSHENG
+
+
+
+SYMBOL TABLE OF MODULE:  qiangsheng (QIANGSHENG)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        QIANGSHENG
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  B:00A0H.5       PUBLIC        BEEP
+  C:082FH         PUBLIC        main
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/27/2025  22:07:24  PAGE 2
+
+
+  D:0089H         PUBLIC        TMOD
+  C:0800H         PUBLIC        Time0
+  B:00A8H.1       PUBLIC        ET0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  D:0008H         PUBLIC        H_count
+  B:0088H.4       PUBLIC        TR0
+  D:0009H         PUBLIC        L_count
+  B:00B0H.1       PUBLIC        K1
+  -------         PROC          MAIN
+  C:082FH         LINE#         20
+  C:082FH         LINE#         21
+  C:082FH         LINE#         22
+  C:0832H         LINE#         23
+  C:0834H         LINE#         24
+  C:0837H         LINE#         25
+  C:083AH         LINE#         26
+  C:083DH         LINE#         27
+  C:0840H         LINE#         28
+  C:0843H         LINE#         29
+  C:0845H         LINE#         30
+  C:0847H         LINE#         32
+  C:0847H         LINE#         33
+  C:0847H         LINE#         34
+  C:084AH         LINE#         35
+  C:084CH         LINE#         36
+  -------         ENDPROC       MAIN
+  -------         PROC          TIME0
+  C:0800H         LINE#         42
+  C:0802H         LINE#         44
+  C:0804H         LINE#         45
+  C:0808H         LINE#         46
+  C:0808H         LINE#         47
+  C:0808H         LINE#         48
+  C:0808H         LINE#         49
+  C:080AH         LINE#         51
+  C:080CH         LINE#         53
+  C:0812H         LINE#         54
+  C:0812H         LINE#         55
+  C:0814H         LINE#         56
+  C:0817H         LINE#         57
+  C:081CH         LINE#         59
+  C:081CH         LINE#         61
+  C:081CH         LINE#         62
+  C:081FH         LINE#         63
+  C:0822H         LINE#         64
+  C:0825H         LINE#         65
+  C:0828H         LINE#         66
+  C:082AH         LINE#         67
+  C:082CH         LINE#         68
+  C:082CH         LINE#         69
+  -------         ENDPROC       TIME0
+  -------         ENDMOD        QIANGSHENG
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0051H BYTE ( 3%) *
+******************************************************************************
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/27/2025  22:07:24  PAGE 3
+
+
+
+Program Size: data=11.0 xdata=0 code=96
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

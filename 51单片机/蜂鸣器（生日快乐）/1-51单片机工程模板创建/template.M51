@@ -1,0 +1,156 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        03/27/2025  22:00:40  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\RUANJIAN\C51\C51\BIN\BL51.EXE main.obj TO template RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  D:\RUANJIAN\C51\C51\LIB\C51S.LIB (?C_STARTUP)
+  D:\RUANJIAN\C51\C51\LIB\C51S.LIB (?C?IMUL)
+  D:\RUANJIAN\C51\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  template (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0004H     UNIT         ?DT?MAIN
+            IDATA   000CH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     07F2H                  *** GAP ***
+            CODE    0800H     008CH     UNIT         ?C_C51STARTUP
+            CODE    088CH     0052H     UNIT         ?PR?MAIN?MAIN
+            CODE    08DEH     0042H     UNIT         ?CO?MAIN
+            CODE    0920H     0020H     UNIT         ?PR?_DELAY_MS?MAIN
+            CODE    0940H     0012H     UNIT         ?C?LIB_CODE
+            CODE    0952H     000FH     UNIT         ?PR?TIMER0_ISR?MAIN
+            CODE    0961H     0008H     UNIT         ?PR?TIMER0_INIT?MAIN
+            CODE    0969H     0005H     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   template (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN
+  +--> ?PR?TIMER0_INIT?MAIN
+  +--> ?CO?MAIN
+  +--> ?PR?_DELAY_MS?MAIN
+
+
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/27/2025  22:00:40  PAGE 2
+
+
+SYMBOL TABLE OF MODULE:  template (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  C:0952H         PUBLIC        timer0_isr
+  D:0008H         PUBLIC        note_duration
+  B:00A8H.7       PUBLIC        EA
+  D:00A8H         PUBLIC        IE
+  C:0907H         PUBLIC        music_beats
+  D:00B8H         PUBLIC        IP
+  D:000AH         PUBLIC        current_tone
+  B:00A0H.5       PUBLIC        buzzer
+  C:088CH         PUBLIC        main
+  C:08EEH         PUBLIC        music_notes
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  C:08DEH         PUBLIC        tone
+  B:00A8H.1       PUBLIC        ET0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  C:0920H         PUBLIC        _delay_ms
+  B:0088H.4       PUBLIC        TR0
+  D:00C8H         PUBLIC        T2CON
+  C:0961H         PUBLIC        timer0_init
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          TIMER0_INIT
+  C:0961H         LINE#         36
+  C:0961H         LINE#         37
+  C:0964H         LINE#         38
+  C:0966H         LINE#         39
+  C:0968H         LINE#         40
+  -------         ENDPROC       TIMER0_INIT
+  -------         PROC          _DELAY_MS
+  D:0006H         SYMBOL        ms
+  -------         DO            
+  D:0004H         SYMBOL        i
+  D:0002H         SYMBOL        j
+  -------         ENDDO         
+  C:0920H         LINE#         42
+  C:0920H         LINE#         44
+  C:092AH         LINE#         45
+  C:093FH         LINE#         46
+  -------         ENDPROC       _DELAY_MS
+  -------         PROC          MAIN
+  -------         DO            
+  D:0001H         SYMBOL        i
+  -------         ENDDO         
+  C:088CH         LINE#         48
+  C:088CH         LINE#         50
+  C:088FH         LINE#         51
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/27/2025  22:00:40  PAGE 3
+
+
+  C:0891H         LINE#         53
+  C:0891H         LINE#         54
+  C:0893H         LINE#         55
+  C:08ACH         LINE#         56
+  C:08B0H         LINE#         57
+  C:08B4H         LINE#         58
+  C:08B6H         LINE#         59
+  C:08C8H         LINE#         60
+  C:08CAH         LINE#         61
+  C:08D1H         LINE#         62
+  C:08D5H         LINE#         63
+  C:08DCH         LINE#         64
+  -------         ENDPROC       MAIN
+  -------         PROC          TIMER0_ISR
+  C:0952H         LINE#         68
+  C:0954H         LINE#         69
+  C:0958H         LINE#         70
+  C:095CH         LINE#         71
+  C:095EH         LINE#         72
+  -------         ENDPROC       TIMER0_ISR
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        ?C?IMUL
+  C:0940H         PUBLIC        ?C?IMUL
+  -------         ENDMOD        ?C?IMUL
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00D2H BYTE (10%) *
+******************************************************************************
+
+Program Size: data=13.0 xdata=0 code=372
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

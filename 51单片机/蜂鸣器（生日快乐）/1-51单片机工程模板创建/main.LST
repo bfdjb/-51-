@@ -1,0 +1,97 @@
+C51 COMPILER V9.54   MAIN                                                                  03/27/2025 22:00:40 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: D:\ruanjian\C51\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include <reg52.h>
+   2          
+   3          sbit buzzer = P2^5; // ???????
+   4          unsigned int current_tone; // ????????????
+   5          
+   6          // ????????????(12MHz??)
+   7          code unsigned int tone[] = {
+   8              0xF8E6, // G4 (392Hz)
+   9              0xF8F4, // A4 (440Hz)
+  10              0xF9B6, // C5 (523Hz)
+  11              0xF985, // B4 (494Hz)
+  12              0xFA14, // D5 (587Hz)
+  13              0xFA66, // E5 (659Hz)
+  14              0xFB03, // G5 (784Hz)
+  15              0xFAC8  // F5 (698Hz)
+  16          };
+  17          
+  18          // ??????????
+  19          code unsigned char music_notes[] = {
+  20              0, 0, 1, 0, 2, 3,  // ???
+  21              0, 0, 1, 0, 4, 5,  // ???
+  22              0, 0, 6, 5, 2, 3, 1, // ???
+  23              7, 7, 5, 2, 4, 2    // ???
+  24          };
+  25          
+  26          // ????????
+  27          code unsigned char music_beats[] = {
+  28              1,1,2,2,2,3,
+  29              1,1,2,2,2,3,
+  30              1,1,2,2,2,2,2,
+  31              2,2,2,2,2,3
+  32          };
+  33          
+  34          unsigned int note_duration = 300; // ????(ms)
+  35          
+  36          void timer0_init() {
+  37   1          TMOD |= 0x01;   // Timer0??1
+  38   1          ET0 = 1;        // ?????0??
+  39   1          EA = 1;         // ?????
+  40   1      }
+  41          
+  42          void delay_ms(unsigned int ms) {
+  43   1          unsigned int i, j;
+  44   1          for(i = 0; i < ms; i++)
+  45   1              for(j = 0; j < 123; j++);
+  46   1      }
+  47          
+  48          void main() {
+  49   1          unsigned char i;
+  50   1          timer0_init();
+  51   1          buzzer = 0;
+  52   1          
+  53   1          while(1) {
+  54   2              for(i = 0; i < sizeof(music_notes); i++) {
+  55   3                  current_tone = tone[music_notes[i]];
+C51 COMPILER V9.54   MAIN                                                                  03/27/2025 22:00:40 PAGE 2   
+
+  56   3                  TH0 = current_tone >> 8;
+  57   3                  TL0 = current_tone & 0xFF;
+  58   3                  TR0 = 1; // ?????
+  59   3                  delay_ms(note_duration * music_beats[i]);
+  60   3                  TR0 = 0; // ?????
+  61   3                  delay_ms(30); // ???????
+  62   3              }
+  63   2              delay_ms(2000); // ?????2???
+  64   2          }
+  65   1      }
+  66          
+  67          // ?????????
+  68          void timer0_isr() interrupt 1 {
+  69   1          TH0 = current_tone >> 8;
+  70   1          TL0 = current_tone & 0xFF;
+  71   1          buzzer = ~buzzer; // ???????
+  72   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    137    ----
+   CONSTANT SIZE    =     66    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
