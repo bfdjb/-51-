@@ -1,0 +1,59 @@
+C51 COMPILER V9.54   MAIN                                                                  04/04/2025 20:01:30 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: D:\ruanjian\C51\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "reg52.h"
+   2          #include "Delay.h"//显示输出“x”
+   3          
+   4          sbit SCK=P3^6;  //移位寄存器
+   5          sbit RCK=P3^5;          //存储寄存器
+   6          sbit SER=P3^4;   //串行数据输入
+   7          
+   8          void write_byte(unsigned char byte)//74HC595模块输出
+   9          {
+  10   1              unsigned char i;
+  11   1              for(i=0;i<8;i++)
+  12   1              {  SER=byte&(0x80>>i);
+  13   2                      SCK=1;SCK=0;
+  14   2              }
+  15   1          RCK=1;RCK=0;
+  16   1      }
+  17          void Martrixled_ShowColumn(unsigned char Column,Data)//输出1列中的一帧
+  18          {    write_byte(Data);//输出列
+  19   1               P0=~(0x80>>Column);//列选
+  20   1               Delay(1);P0=0xff;
+  21   1      
+  22   1      }
+  23          void main()
+  24          {
+  25   1              SCK=0;RCK=0;
+  26   1              while(1)
+  27   1              {   Martrixled_ShowColumn(0,0x81);
+  28   2                      Martrixled_ShowColumn(1,0x42);
+  29   2                      Martrixled_ShowColumn(2,0x24);
+  30   2                      Martrixled_ShowColumn(3,0x18);
+  31   2                      Martrixled_ShowColumn(4,0x18);
+  32   2                      Martrixled_ShowColumn(5,0x24);
+  33   2                      Martrixled_ShowColumn(6,0x42);
+  34   2                      Martrixled_ShowColumn(7,0x81);
+  35   2              }
+  36   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    157    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

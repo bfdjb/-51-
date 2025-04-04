@@ -1,0 +1,6 @@
+"main.obj",
+"LCD1602.obj",
+"DS1302.obj",
+"Delay.obj" 
+TO "template" 
+RAMSIZE(256) 
