@@ -1,0 +1,102 @@
+C51 COMPILER V9.54   MAIN                                                                  04/04/2025 13:52:28 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: D:\ruanjian\C51\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /**************************************************************************************
+   2          深圳市普中科技有限公司（PRECHIN 普中）
+   3          技术支持：www.prechin.net
+   4          PRECHIN
+   5           普中
+   6          
+   7          实验名称：外部中断0实验
+   8          接线说明：      
+   9          实验现象：下载程序后，当按下K3键可控制D1指示灯亮灭
+  10          注意事项：将红外接收传感器取下，防止对P3.2口干扰                                                                                                                                                                  
+  11          ***************************************************************************************/
+  12          #include "reg52.h"
+  13          
+  14          typedef unsigned int u16;       
+  15          typedef unsigned char u8;
+  16          #define LED P2 
+  17          u16 led=0x01;
+  18          u16 count=0;
+  19          bit run_flag = 1;
+  20          sbit KEY3=P3^2;
+  21          sbit KEY1=P3^1;
+  22          void delay_10us(u16 ten_us)
+  23          {
+  24   1              while(ten_us--);        
+  25   1      }
+  26          
+  27          void Timer0Init(void)           
+  28          {
+  29   1              
+  30   1              TMOD &= 0xF0;           
+  31   1              TMOD |= 0x01;           
+  32   1              TL0 = 0x66;             
+  33   1              TH0 = 0xFC;             
+  34   1              TF0 = 0;                
+  35   1              TR0 = 1;
+  36   1          ET0=1;
+  37   1              EA=1;
+  38   1      }
+  39          
+  40          void exti0_init(void)
+  41          {
+  42   1              IT0=1;//跳变沿触发方式（下降沿）
+  43   1              EX0=1;//打开INT0的中断允许
+  44   1              EA=1;//打开总中断
+  45   1      }
+  46          
+  47          void main()
+  48          {       
+  49   1              exti0_init();//外部中断0配置
+  50   1          Timer0Init();
+  51   1              while(1)
+  52   1              {                       
+  53   2                                                              
+  54   2              }               
+  55   1      }
+C51 COMPILER V9.54   MAIN                                                                  04/04/2025 13:52:28 PAGE 2   
+
+  56          
+  57          void Timer0_ISR(void) interrupt 1
+  58          {
+  59   1          TL0 = 0x66;         
+  60   1              TH0 = 0xFC;
+  61   1              count++;
+  62   1              if((count>=500)&&run_flag){
+  63   2              count=0;led<<=1;if(led > 0x80)  
+  64   2              {
+  65   3                  led= 0x01;  
+  66   3              }
+  67   2              LED=~led;
+  68   2              }
+  69   1      }
+  70          void exti0() interrupt 0 
+  71          {   
+  72   1              delay_10us(1000);
+  73   1              if(KEY3==0){
+  74   2              run_flag=~run_flag;
+  75   2              }
+  76   1                                      
+  77   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    157    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
