@@ -1,0 +1,48 @@
+C51 COMPILER V9.54   MAIN                                                                  04/04/2025 16:55:27 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: D:\ruanjian\C51\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "reg52.h"//通过串口通信用电脑控制led灯的亮灭并返回数据
+   2          #include "delay.h"
+   3          #include "UART.h"
+   4          typedef unsigned int u16;       
+   5          typedef unsigned char u8;
+   6          
+   7          void main()
+   8          {       
+   9   1              Uart_Init();
+  10   1         
+  11   1              while(1)
+  12   1              {                       
+  13   2                                      
+  14   2              }               
+  15   1      }
+  16          
+  17          void UART_Routine() interrupt 4  //串口中断
+  18          {
+  19   1        if(RI==1){
+  20   2        P2=~SBUF;
+  21   2        UART_sendbyte(SBUF);
+  22   2        RI=0;
+  23   2        }
+  24   1              
+  25   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     76    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

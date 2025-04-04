@@ -1,0 +1,5 @@
+"main.obj",
+"Delay.obj",
+"UART.obj" 
+TO "template" 
+RAMSIZE(256) 
