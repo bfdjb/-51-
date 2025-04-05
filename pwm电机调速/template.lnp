@@ -1,0 +1,8 @@
+"main.obj",
+"LCD1602.obj",
+"Delay.obj",
+"Key.obj",
+"Nixie.obj",
+"Timer0.obj" 
+TO "template" 
+RAMSIZE(256) 
